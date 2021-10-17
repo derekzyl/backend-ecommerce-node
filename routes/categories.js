@@ -24,7 +24,8 @@ if (!category){
     res.status(201).json(category).send(category )
 
 
- })
+ });
+ 
  router.put('/:id', async(req, res)=>{
      if (!mongoose.isValidObjectId(req.params.id)){
          res.status(400).json({

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 
-const productSchema =  mongoose.Schema({
+let productSchema =  mongoose.Schema({
+    
     name: {
         type:String,
         required :true
@@ -15,7 +16,7 @@ description:{
     default:'',
 
 },
-richDescription: {type:String,
+richDescription: { 
 type: String,
 default: ''
 },
@@ -42,7 +43,7 @@ countInStock:{
     max:255
 
 },
-rating:{type:Number,
+rating:{type:Number, 
 default:0},
 numReviews:{type:Number,
 default:0},
@@ -52,6 +53,18 @@ dateCreated:{type:Date,
 default:Date.now}
 
     
-})
- module.exports = mongoose.model('Product', productSchema )
+});
+
+
+productSchema.virtual('id').get(function (){
+return this._id.toHexString();
+ });
+
+ productSchema.set('toJSON', {
+     virtuals:true
+ });
+
+
+
+ module.exports = mongoose.model('Product', productSchema );
  
